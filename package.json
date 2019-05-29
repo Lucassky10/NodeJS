@@ -1,0 +1,19 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "projet nodejs enssat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucassky10/NodeJS.git"
+  },
+  "author": "Lucas Rollin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lucassky10/NodeJS/issues"
+  },
+  "homepage": "https://github.com/Lucassky10/NodeJS#readme"
+}
