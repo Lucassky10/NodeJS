@@ -1,4 +1,3 @@
-create schema public;
 create table ref_roles (
     nom varchar unique NOT NULL,
     num integer unique NOT NULL,
@@ -8,13 +7,13 @@ create table ref_roles (
 create table serveurs (
     ID  SERIAL PRIMARY KEY,
     nom varchar unique not null,
-    id_serveur_discord varchar(60) not null -- id du serveur (dans discord)
+    id_discord varchar(60) not null -- id du serveur (dans discord)
 );
 
 create table salons (
-    id_discord  varchar unique not null,
+    id_discord  varchar(60) unique not null,
     nom varchar unique not null,
-    id_serveur integer references serveurs(id) -- id du serveur (dans discord)
+    id_serveur integer references serveurs(id) -- id du serveur en local
 );
 
 create table roles (
@@ -45,10 +44,10 @@ create table sanctions (
 );
 
  -- données fake pour tester table serveurs
-insert into serveurs (nom, id_serveur_discord) values ('wazoo', '12435');
-insert into serveurs (nom, id_serveur_discord) values ('ouloulou', '3245');
-insert into serveurs (nom, id_serveur_discord) values ('akiaki', '4563');
-insert into serveurs (nom, id_serveur_discord) values ('pneu', '1212');
+insert into serveurs (nom, id_discord) values ('wazoo', '12435');
+insert into serveurs (nom, id_discord) values ('ouloulou', '3245');
+insert into serveurs (nom, id_discord) values ('akiaki', '4563');
+insert into serveurs (nom, id_discord) values ('pneu', '1212');
 
  -- données fake pour tester table ref_roles
 
@@ -114,7 +113,7 @@ Select id_user_discord from roles
 where nom='moderateur' and id_serveur=3;
 
 Select id_user_discord from roles,serveurs
-where roles.nom='moderateur' and roles.id_serveur=serveurs.id and serveurs.id_serveur_discord='3245';
+where roles.nom='moderateur' and roles.id_serveur=serveurs.id and serveurs.id_discord='3245';
 
 5-
 insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut,date_fin)
