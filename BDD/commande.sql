@@ -16,6 +16,13 @@ create table salons (
     id_serveur integer references serveurs(id) -- id du serveur en local
 );
 
+
+create table categories (
+    id_discord  varchar(60) unique not null,
+    nom varchar unique not null,
+    id_serveur integer references serveurs(id) -- id du serveur en local
+);
+
 create table roles (
     id_user_discord  varchar unique not null, -- id utilisateur discord
     id_serveur integer references serveurs(id) ,
@@ -34,9 +41,10 @@ create table commandes (
 create table sanctions (
     id  SERIAL PRIMARY KEY,
     id_serveur integer references serveurs(id) ,
-    id_moderateur_discord varchar references roles(id_discord) ,
+    id_moderateur_discord varchar references roles(id_user_discord) ,
     id_user_discord varchar not null,
-    id_salon_discord varchar references salons(id_user_discord),
+    id_salon_discord varchar references salons(id_discord),
+    id_categorie_discord varchar references categories(id_discord),
     commande varchar references commandes(nom),
     date_debut date not null,
     date_fin date,
