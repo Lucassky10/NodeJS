@@ -1,10 +1,10 @@
 {
   "name": "project",
   "version": "1.0.0",
-  "description": "projet nodejs enssat",
+  "description": "Discord Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "babel-node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,15 +17,21 @@
   },
   "homepage": "https://github.com/Lucassky10/NodeJS#readme",
   "dependencies": {
+    "bufferutil": "^4.0.1",
     "discord.js": "^11.5.1",
     "ejs": "^2.6.1",
+    "es6": "0.0.7",
     "express": "^4.17.1",
     "express-session": "^1.16.1",
-    "https": "^1.0.0",
+    "libsodium-wrappers": "^0.7.4",
     "lodash": "^4.17.11",
     "nodejs-websocket": "^1.7.2",
     "pg": "^7.11.0",
     "request": "^2.88.0",
     "websocket": "^1.0.28"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   }
 }
