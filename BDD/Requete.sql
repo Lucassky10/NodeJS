@@ -1,8 +1,16 @@
+select * from roles;
+select * from commandes;
+select * from sanctions;
+select * from serveurs;
+select * from ref_roles;
+
+
 1-
 Select * from serveurs;
 
 2-
 Select distinct nom from roles;
+
 
 3-
 Update roles set nom='neutre', num=7

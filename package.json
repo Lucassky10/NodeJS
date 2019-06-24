@@ -20,6 +20,10 @@
     "ejs": "^2.6.1",
     "express": "^4.17.1",
     "express-session": "^1.16.1",
-    "lodash": "^4.17.11"
+    "https": "^1.0.0",
+    "lodash": "^4.17.11",
+    "nodejs-websocket": "^1.7.2",
+    "request": "^2.88.0",
+    "websocket": "^1.0.28"
   }
 }
