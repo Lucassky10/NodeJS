@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body>
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+
+<main class="container">
+        <div class="jumbotron">
+                <h1 class="display-4">Bienvenue !</h1>
+                <p class="lead">Voici un lien pour inviter notre bot sur ton serveur Discord !</p>
+                <hr class="my-4">
+                <h4 class="text-center"><a href="<%= link %>" target="_blank"><%= link %></a></h4>
+                <hr class="my-4">
+                <div class="row text-center">
+<!--                <img src="/images/discord.svg" alt="Discord logo" width="200" height="100">-->
+                </div>
+            <% if(!isConnected) { %>
+                <p class="lead text-center mb-4">Après réception de vos indentifiants par message privé vous pouvez vous connecter ici</p>
+                <form class="form-signin" action="home" method="post">
+                        <input name="id" type="text" id="inputEmail" class="form-control" placeholder="Identifiant" required autofocus>
+                        <input name="pwd" type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+                </form>
+            <% } else if(isConnected) { %>
+                <p>Tu es connecté</p>
+            <% } %>
+        </div>
+</main>
+
+<!-- évènement quand le serveur a été invité
+le bot donne un login et un mdp à l'admin
+en bdd : stocker login et/ou mdp -->
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>

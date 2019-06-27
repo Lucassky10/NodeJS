@@ -12,7 +12,7 @@ db.connect();
 //     .then(result => console.log(result.rows[0].id))
 //     .catch(e => console.error(e.stack));
 
-console.log(new Date().getFullYear() +"/" + new Date().  + "/" + new Date().getDate());
+// console.log(new Date().getFullYear() +"/" + new Date().  + "/" + new Date().getDate());
 
 
 const BOT_TOKEN = "NTg1NzIyNjAyOTAzOTYxNjEw.XQ5f0Q.QkXb5YP6gw2j5WqNUf2sSD-c0ro";
@@ -71,6 +71,6 @@ client.on('message', async msg => {
     }
 
 
-})
+});
 
 client.login(BOT_TOKEN);
