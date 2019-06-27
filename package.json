@@ -4,7 +4,7 @@
   "description": "Discord Project",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js"
+    "start": "nodemon --exec babel-node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Lucassky10/NodeJS#readme",
   "dependencies": {
     "bufferutil": "^4.0.1",
+    "date.js": "^0.3.3",
     "discord.js": "^11.5.1",
     "ejs": "^2.6.1",
     "es6": "0.0.7",
@@ -25,6 +26,7 @@
     "express-session": "^1.16.1",
     "libsodium-wrappers": "^0.7.4",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "nodejs-websocket": "^1.7.2",
     "pg": "^7.11.0",
     "request": "^2.88.0",

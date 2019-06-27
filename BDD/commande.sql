@@ -44,49 +44,9 @@ create table sanctions (
     id_salon_discord varchar references salons(id_discord),
     id_categorie_discord varchar references categories(id_discord),
     commande varchar references commandes(nom),
-    date_debut date not null,
-    date_fin date,
+    date_debut timestamp not null,
+    date_fin timestamp,
     raison varchar(120)
 );
 
- -- données fake pour tester table serveurs
-insert into serveurs (nom, id_discord) values ('wazoo', '12435');
-insert into serveurs (nom, id_discord) values ('ouloulou', '3245');
-insert into serveurs (nom, id_discord) values ('akiaki', '4563');
-insert into serveurs (nom, id_discord) values ('pneu', '1212');
 
- -- données fake pour tester table ref_roles
-
-insert into ref_roles values ('admin', 1);
-insert into ref_roles values ('moderateur', 3);
-insert into ref_roles values ('neutre', 5);
-
- -- données fake pour tester roles
-
-insert into roles (id_user_discord, id_serveur, nom, num) values (134 ,1, 'admin', 1);
-insert into roles (id_user_discord, id_serveur, nom, num) values (120 ,1, 'moderateur', 3);
-insert into roles (id_user_discord, id_serveur, nom, num) values (125 ,1, 'neutre', 5);
-
-insert into roles (id_user_discord, id_serveur, nom, num) values (122, 2, 'admin', 1);
-insert into roles (id_user_discord, id_serveur, nom, num) values (135, 2, 'moderateur', 3);
-insert into roles (id_user_discord, id_serveur, nom, num) values (127, 2, 'neutre', 3);
-
-insert into roles (id_user_discord, id_serveur, nom, num) values (123, 3, 'admin', 1);
-insert into roles (id_user_discord, id_serveur, nom, num) values (136, 3, 'moderateur', 3);
-insert into roles (id_user_discord, id_serveur, nom, num) values (129, 3, 'neutre', 3);
-
--- données fake pour tester commandes
-
-insert into commandes (nom, niveau_autorite) values ('ban', 1);
-insert into commandes (nom, niveau_autorite) values ('mute', 2);
-
--- données fake pour tester sanctions
-
-insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut,date_fin)
-values (1, 134, 120, 'ban', '2019-09-10','2019-10-03');
-
-insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut, date_fin)
-values (2, 135, 122, 'mute', '2019-06-12','2019-07-17');
-
-insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut, date_fin)
-values (3, 136, 123, 'ban', '2019-08-03','2019-10-13');

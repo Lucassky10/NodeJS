@@ -4,7 +4,7 @@ export default class CommandsHandler {
 
     constructor(msg) {
         this.msg = msg;
-        this.command = mdg.content;
+        this.command = msg.content;
     }
 
     isCommand() {
@@ -19,8 +19,27 @@ export default class CommandsHandler {
         return this.msg.guild.id;
     }
 
+    getAuthor() {
+        return this.msg.author;
+    }
+
     getAuthorId() {
         return this.msg.author.id;
+    }
+
+    getGuild() {
+        return this.msg.guild;
+    }
+
+    getGuildMember(){
+        return this.getGuild().member(this.msg.mentions.users.first());
+    }
+    getGuildMemberID(){
+        return this.getGuildMember().id;
+    }
+
+    get1stMentioned() {
+        return this.msg.mentions.users.first();
     }
 
 

@@ -12,6 +12,7 @@ db.connect();
 //     .then(result => console.log(result.rows[0].id))
 //     .catch(e => console.error(e.stack));
 
+console.log(new Date().getFullYear() +"/" + new Date().  + "/" + new Date().getDate());
 
 
 const BOT_TOKEN = "NTg1NzIyNjAyOTAzOTYxNjEw.XQ5f0Q.QkXb5YP6gw2j5WqNUf2sSD-c0ro";
@@ -53,9 +54,10 @@ client.on('message', async msg => {
 
                     if (modo_auto<=ban_auto){
                         let member = msg.guild.member(msg.mentions.users.first());
-                        //member.ban({reason: cmd[3]});
-                        para = [id_serveur,id_modo,member.user.id,'ban', 'CURRENT_DATE',"CURRENT_DATE + INTERVAL '15 day'",cmd[3]];
-                        queryText = 'insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut, date_fin,raison) values ($1, $2, $3, $4, $5,$6,$7)';
+                        //member.ban({reason: cmd[2]});
+                        para = [id_serveur,id_modo,member.user.id,'ban', new Date().getDate(),  new Date().getDate() ,cmd[2]];
+                        console.log(para)
+                        //queryText = 'insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut, date_fin,raison) values ($1, $2, $3, $4, $5,$6,$7)';
                         result = await db.query(queryText, para);
                     }
 

@@ -47,8 +47,8 @@ create table sanctions (
     id_salon_discord varchar references salons(id_discord),
     id_categorie_discord varchar references categories(id_discord),
     commande varchar references commandes(nom),
-    date_debut date not null,
-    date_fin date,
+    date_debut timestamp not null,
+    date_fin timestamp,
     raison varchar(120),
     FOREIGN KEY (id_serveur,id_moderateur_discord) REFERENCES roles(id_serveur,id_user_discord)
 );
