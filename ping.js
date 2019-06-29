@@ -12,16 +12,11 @@
 
     const API_ENDPOINT_CHANNEL = "https://discordapp.com/api/channels/585723927087546370/messages";
 
-    const API_ENDPOINT_AUTH = "https://discordapp.com/api/oauth2/authorize";
-
-    const CLIENT_ID = "585722602903961610";
-
     var client = new W3CWebSocket(GATEWAY_URL);
     var heartbeat_interval = null;
     const request = require('request');
     const https = require('https');
-
-
+    
 
     client.onerror = function() {
         console.log('Connection Error');

@@ -12,10 +12,11 @@ let db = new Database();
 try {
     client.on('message', async (msg) => {
 
-        let cmd = await new CommandsHandler(msg);
+        let cmd = new CommandsHandler(msg);
 
 
         if (cmd.isCommand()) {
+
             let guild = cmd.getGuild();
             let nomguild=cmd.getGuild().name;
 
@@ -32,7 +33,6 @@ try {
 
             id_serveur = result.rows[0].id;
 
-
             para = [id_serveur, id_modo];
             result = await db.query('Select num from roles where id_serveur=$1 and id_user_discord=$2', para);
 
@@ -41,8 +41,8 @@ try {
 
                 let cdmsplit = cmd.split();
                 //console.log(cdmsplit);
-                para=[cdmsplit[0].substr(1)];
-                result = await db.query('Select niveau_autorite as num from commandes where nom=$1', para);
+                para = [cdmsplit[0].substr(1)];
+                result = await db.query('Select niveau_autorite as num from commandes where nom=$1 and disponible = true', para);
                 console.log(result);
                 if (result.rowCount > 0) {
                     let cmd_auto = result.rows[0].num;
@@ -61,7 +61,7 @@ try {
                                 para = [id_serveur, id_modo, member.id, 'ban', moment().format('YYYY-MM-DD HH:mm:ss'), moment().add(cmd.split()[2], 'days').format('YYYY-MM-DD  HH:mm:ss'), cmd.split()[3]];
                                 result = await db.query('insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut, date_fin,raison) values ($1, $2, $3, $4, $5,$6,$7)', para);
 
-                            };
+                            }
                             break;
 
                         case '!kick':
@@ -71,13 +71,13 @@ try {
                                 let member = cmd.getGuildMember();
                                 let trest=cmd.get1stMentioned();
                                 console.log(trest);
-                                let avert = await  cmd.get1stMentioned().send('Votre comportement n\'est pas adapté, vous êtes exclu de ' + nomguild  + ' pour la raison suivante : ' + cmd.split()[2]);
+                                let avert = cmd.get1stMentioned().send('Votre comportement n\'est pas adapté, vous êtes exclu de ' + nomguild  + ' pour la raison suivante : ' + cmd.split()[2]);
 
                                 member.kick(cmd.split()[3]);
                                 para = [id_serveur, id_modo, member.id, 'kick', moment().format('YYYY-MM-DD HH:mm:ss'), cmd.split()[2]];
                                 result = await db.query('insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut,raison) values ($1, $2, $3, $4, $5,$6)', para);
 
-                            };
+                            }
                             break;
 
                         case '!mute':
@@ -96,7 +96,7 @@ try {
                                 para = [id_serveur, id_modo, member.id, 'mute', moment().format('YYYY-MM-DD HH:mm:ss'), moment().add(cmd.split()[2], 'days').format('YYYY-MM-DD  HH:mm:ss'), cmd.split()[3]];
                                 retour = await db.query('insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut, date_fin,raison) values ($1, $2, $3, $4, $5,$6,$7)', para);
 
-                            };
+                            }
                             break;
 
                         case '!rankup':
@@ -120,7 +120,7 @@ try {
                                 }
 
 
-                            };
+                            }
                             break;
 
                         case '!rankdown':
@@ -143,7 +143,7 @@ try {
                                 }
 
 
-                            };
+                            }
                             break;
                         case '!warn':
                             para = ['warn'];
@@ -153,7 +153,7 @@ try {
                                 para = [id_serveur, id_modo, member.id, 'warn', moment().format('YYYY-MM-DD HH:mm:ss'), cmd.split()[2]];
                                 result = await db.query('insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut,raison) values ($1, $2, $3, $4, $5,$6)', para);
 
-                            };
+                            }
                             break;
 
 
@@ -161,10 +161,10 @@ try {
                             let reply = cmd.msg.reply('La commande ' + cdmsplit[0] + ' n\'existe pas, commandes disponibles : !ban, !kick, !mute, !rankup, !rankdown, !warn' );
                             break;
 
-
                     }
 
-                }else {let reply = cmd.msg.reply('La commande ' + cdmsplit[0] + ' n\'existe pas, commandes disponibles : !ban, !kick, !mute, !rankup, !rankdown, !warn' );
+                }else {
+                    let reply = cmd.msg.reply('La commande ' + cdmsplit[0] + ' n\'existe pas, commandes disponibles : !ban, !kick, !mute, !rankup, !rankdown, !warn' );
                 }
 
             }

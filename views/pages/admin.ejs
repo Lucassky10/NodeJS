@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body>
+
+<header> <% include ../partials/header%> </header>
+
+<div class="container">
+
+<% if(urlIsCommands === true) {
+
+	if(noCommands === false) {
+		%>
+		<h1 class="text-center text-white mb-3">Gestion des commandes</h1>
+
+	<table class="table table-dark text-center">
+		<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Commande</th>
+			<th scope="col">Niveau Autorité</th>
+			<th scope="col">Modification</th>
+		</tr>
+		</thead>
+		<tbody>
+	<%
+
+	let i=0;
+	commands.rows.forEach((row) => {
+	i++;
+%>
+
+	<tr>
+		<th scope="row"><%= i %></th>
+		<td><%= row.nom %></td>
+		<td><%= row.niveau_autorite %></td>
+		<% if(row.disponible) { %>
+		<td><a class="btn btn-danger" href="/delete-command/<%= row.nom %>">Supprimer</a></td>
+		<% } else { %>
+			<td><a class="btn btn-success" href="/add-command/<%= row.nom %>">Ajouter</a></td>
+		<% } %>
+	</tr>
+
+<% }) %>
+
+
+<% } else { %>
+	<h3 class="text-white text-center">Aucune commande disponible</h3>
+
+
+
+<%
+	}
+} else { %>
+
+<h1 class="text-white text-center display-4 mt-5">Bienvenue sur votre panneau d'administration !</h1>
+		<div class="container center-block">
+			<img src="images/robot.gif" alt="panel logo" width="400" height="400">
+		</div>
+
+<%
+	}
+%>
+
+		</tbody>
+	</table>
+</div>
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>
