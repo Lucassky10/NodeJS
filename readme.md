@@ -2,7 +2,9 @@
 
 ## Getting started
 
-```git clone https://github.com/Lucassky10/NodeJS.git```
+Cloner le dossier localement : ```git clone https://github.com/Lucassky10/NodeJS.git```
+
+Ramener les dépendances : ```npm install```
 
 Afin de pouvoir utiliser le bot il faut créer la base de données avec le script `nouvelle_base.sql`
 
