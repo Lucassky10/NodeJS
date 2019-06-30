@@ -12,7 +12,7 @@ export default class Database {
     }
 
     async query(sql, params) {
-        return this.db.query(sql, params).rows;
+        return this.db.query(sql, params);
     }
 
 

@@ -44,7 +44,6 @@ create table sanctions (
     id  SERIAL PRIMARY KEY,
     id_serveur integer,
     id_moderateur_discord varchar,
-    id_user_discord varchar not null,
     id_salon_discord varchar references salons(id_discord),
     id_categorie_discord varchar references categories(id_discord),
     commande varchar references commandes(nom),

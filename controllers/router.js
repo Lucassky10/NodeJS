@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import sha1 from 'sha1';
 import session from 'express-session'
 import generator from 'generate-password'
+import _ from 'lodash'
 const app = express();
 const port = 8080;
 let client = new DiscordClient('NTg1NzIyNjAyOTAzOTYxNjEw.XRSObA.BYL29cgdeszAgrVmYF3rdDwmYXk');
@@ -38,7 +39,6 @@ client.on('guildCreate', async guild => {
     members.tap(member => {
         if (member.id === owner) {
             member.send('Identifiant : ' + owner + '\nMot de passe : ' + generatedPassword);
-            member.send('Identifiant : ' + owner + '\nMot de passe : ' + generatedPassword);
         }
     });
 });
@@ -56,7 +56,7 @@ client.on('guildDelete', async guild => {
 
 app.get('/home', (req, res) => {
 
-    let inviteLink = "https://discordapp.com/oauth2/authorize?client_id=" + client.user.id + "&scope=bot";
+    let inviteLink = "https://discordapp.com/oauth2/authorize?client_id=" + client.user.id;
 
     console.log(req.session.login);
     console.log(req.session.password);
@@ -106,7 +106,42 @@ app.get('/bot-configuration', (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
-    res.send('Cool');
+    res.render('pages/admin', { urlIsCommands : false });
+});
+
+app.get('/commands', async (req, res) => {
+
+    let commands = "SELECT * FROM Commandes";
+    commands = await db.query(commands);
+    let commandsAvailable = null;
+    let noCommands = false;
+    if(commands.rowCount !== 0) {
+
+        commandsAvailable = commands;
+
+    } else {
+         noCommands = true;
+    }
+
+    res.render('pages/admin', { urlIsCommands : true, commands : commandsAvailable, noCommands: noCommands });
+
+});
+
+app.get('/delete-command/:nom', async (req, res) => {
+
+
+    let deleteCommand = "UPDATE Commandes SET disponible = false WHERE nom = '" + req.params.nom + "'";
+    await db.query(deleteCommand);
+    res.redirect('/commands');
+
+});
+
+app.get('/add-command/:nom', async (req, res) => {
+
+   let updateCommand = "UPDATE Commandes SET disponible = true WHERE nom = '" + req.params.nom + "'";
+   await db.query(updateCommand);
+
+    res.redirect('/commands');
 });
 
 app.listen(port);
