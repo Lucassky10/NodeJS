@@ -34,6 +34,7 @@ export default class Bot {
     }
 
     async onMessage() {
+        let commandedispo= await this.getCommmandesDisponibles();
 
         let msgInfo = {
 
@@ -110,8 +111,16 @@ export default class Bot {
 
     async getCommmandesDisponibles() {
 
-        let result = this.db.query("select nom from Commandes where disponible = true");
-        console.log(result);
+        let result = await this.db.query("select nom from Commandes where disponible = true");
+        let i=0;
+        let texte="Les commandes disponibles sont "
+        while (i<result.rowCount) {
+            texte=texte + "!" + result.rows[i].nom + ", ";
+            i++;
+
+        }
+        return texte;
+
         
     }
 
