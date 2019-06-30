@@ -4,10 +4,9 @@ import Discord from 'discord.js'
 
 export default class DiscordClient {
 
-    constructor(bot_token) {
+    constructor() {
         const client = new Discord.Client();
-        client.login(bot_token);
-        console.log("ready");
+        client.login("NTg1NzIyNjAyOTAzOTYxNjEw.XRSObA.BYL29cgdeszAgrVmYF3rdDwmYXk");
         return client;
     }
 

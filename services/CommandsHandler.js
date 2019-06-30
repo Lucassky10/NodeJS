@@ -1,10 +1,13 @@
 'use strict';
 
+import Database from "./Database";
+
 export default class CommandsHandler {
 
     constructor(msg) {
         this.msg = msg;
         this.command = msg.content;
+        this.db = new Database();
     }
 
     isCommand() {
@@ -24,7 +27,7 @@ export default class CommandsHandler {
     }
 
     getAuthorId() {
-        return this.msg.author.id;
+        return String(this.msg.author.id);
     }
 
     getGuild() {
@@ -40,6 +43,17 @@ export default class CommandsHandler {
 
     get1stMentioned() {
         return this.msg.mentions.users.first();
+    }
+
+    async getAvailableCommands() {
+
+        let result = await this.db.query("SELECT nom FROM Commandes WHERE disponible = true");
+        let commands = [];
+
+
+        console.log(result.rows);
+
+
     }
 
 

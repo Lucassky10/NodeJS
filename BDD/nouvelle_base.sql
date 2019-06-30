@@ -1,3 +1,5 @@
+
+
 create table ref_roles (
     nom varchar NOT NULL,
     num integer NOT NULL,
@@ -44,6 +46,7 @@ create table sanctions (
     id  SERIAL PRIMARY KEY,
     id_serveur integer,
     id_moderateur_discord varchar,
+    id_user_discord varchar not null,
     id_salon_discord varchar references salons(id_discord),
     id_categorie_discord varchar references categories(id_discord),
     commande varchar references commandes(nom),
@@ -51,6 +54,12 @@ create table sanctions (
     date_fin timestamp,
     raison varchar(120),
     FOREIGN KEY (id_serveur,id_moderateur_discord) REFERENCES roles(id_serveur,id_user_discord)
+);
+
+create table membres (
+    id_discord varchar not null,
+    pwd varchar(60) not null,
+    primary key (id_discord)
 );
 
  -- données table serveurs

@@ -1,22 +1,24 @@
 "use strict";
 
+
 (function () {
+    import W3CWebSocket from 'websocket';
+    import request from 'request';
     // Discord Bot Token here
-    const BOT_TOKEN = "NTg1NzIyNjAyOTAzOTYxNjEw.XQ5f0Q.QkXb5YP6gw2j5WqNUf2sSD-c0ro";
+    const BOT_TOKEN = "NTg1NzIyNjAyOTAzOTYxNjEw.XRiQlw.JZhF1l04zAslBTfMEaQpANxsEpE";
     
     // Discord Gateway url
     const GATEWAY_URL = "wss://gateway.discord.gg/?v=6&encoding=json";
     
     // Websocket object
-    let W3CWebSocket = require("websocket").w3cwebsocket;
+
+    W3CWebSocket = W3CWebSocket.w3cwebsocket;
 
     const API_ENDPOINT_CHANNEL = "https://discordapp.com/api/channels/585723927087546370/messages";
 
     var client = new W3CWebSocket(GATEWAY_URL);
     var heartbeat_interval = null;
-    const request = require('request');
-    const https = require('https');
-    
+
 
     client.onerror = function() {
         console.log('Connection Error');
@@ -72,7 +74,7 @@
         }
 
         if(answer.t === "MESSAGE_CREATE"){
-            if(answer.d.content === "ping"){
+            if(answer.d.content === "Ping!"){
                 sendPong();
             }
         }
