@@ -2,6 +2,7 @@ import DiscordClient from "./DiscordClient";
 import Database from "./Database";
 import CommandsHandler from "./CommandsHandler";
 import moment from 'moment';
+import sha1 from 'sha1'
 
 export default class Bot {
 
@@ -34,7 +35,6 @@ export default class Bot {
     }
 
     async onMessage() {
-        let commandedispo= await this.getCommmandesDisponibles();
 
         let msgInfo = {
 
@@ -67,11 +67,14 @@ export default class Bot {
           
                     this.executeCommand(this.commandSplit[0], msgInfo, idLocalServer);        
 
+                } else {
+                this.command.msg.reply("Vous n'avez pas les droits pour effectuer cette opération !");
+
                 }
 
 
             } else {
-                this.command.msg.reply('La commande ' + this.commandSplit[0] + ' n\'existe pas, commandes disponibles : !ban, !kick, !mute, !rankup, !rankdown, !warn' );
+                this.command.msg.reply('La commande ' + this.commandSplit[0] + ' n\'existe pas. ' + await this.getCommmandesDisponibles());
 
             }
         }
@@ -113,29 +116,38 @@ export default class Bot {
 
         let result = await this.db.query("select nom from Commandes where disponible = true");
         let i=0;
-        let texte="Les commandes disponibles sont "
-        while (i<result.rowCount) {
-            texte=texte + "!" + result.rows[i].nom + ", ";
-            i++;
-
+        let texte = null;
+        if(result.rowCount > 0) {
+            texte="Les commandes disponibles sont "
+            while (i<result.rowCount) {
+                if(i === result.rowCount - 1) {
+                    texte=texte + "!" + result.rows[i].nom + ".";
+                } else {
+                    texte=texte + "!" + result.rows[i].nom + ", ";
+                }
+                i++;
+            }
+        } else {
+            texte = "Aucune commande n'est disponible !";
         }
+       
         return texte;
 
-        
     }
 
-    executeCommand(command, msgInfo, idLocalServer) {
+    async executeCommand(command, msgInfo, idLocalServer) {
 
         let params = null;
         let res = null;
         let newrole = null;
+        // let commandesDisponibles = await
         switch(command) {
 
             case '!ban':
                 // para = ['ban'];
 
 
-                    this.command.get1stMentioned().send('Votre comportement n\'est pas adapté, vous êtes banni de ' + msgInfo.guild.nom  + ' pour la raison suivante : ' + this.commandSplit[3] + ', pour une durée de ' + this.commandSplit[2] + ' jours');
+                    await this.command.get1stMentioned().send('Votre comportement n\'est pas adapté, vous êtes banni de ' + msgInfo.guild.nom  + ' pour la raison suivante : ' + this.commandSplit[3] + ', pour une durée de ' + this.commandSplit[2] + ' jours');
 
                     msgInfo.guild.member.ban({reason: this.commandSplit[3]});
 
@@ -149,7 +161,8 @@ export default class Bot {
 
                     this.command.get1stMentioned().send('Votre comportement n\'est pas adapté, vous êtes exclu de ' + msgInfo.guild.nom  + ' pour la raison suivante : ' + this.commandSplit[2]);
 
-                    msgInfo.guild.member.kick(this.commandSplit[3]);
+                    msgInfo.guild.member.kick()
+                    .then(() => console.log(`Kicked ${member.displayName}`))
                     params = [idLocalServer, msgInfo.auteur.id, msgInfo.guild.member.id, 'kick', moment().format('YYYY-MM-DD HH:mm:ss'), this.commandSplit[2]];
                     res = this.db.query('insert into sanctions (id_serveur, id_moderateur_discord, id_user_discord, commande, date_debut,raison) values ($1, $2, $3, $4, $5,$6)', params);
 
@@ -218,7 +231,7 @@ export default class Bot {
             break;
             default:
 
-                this.command.msg.reply('La commande ' + command + ' n\'existe pas, commandes disponibles : !ban, !kick, !mute, !rankup, !rankdown, !warn' );
+                this.command.msg.reply('La commande ' + command + ' n\'existe pas. ' + await this.getCommmandesDisponibles());
             
             break;
 

@@ -32,15 +32,15 @@ Attention : cette commande est un alias qui comprend la commande ```pkill node``
 
 Il existe 6 commandes disponibles pour notre bot, que nous pouvons gérer avec notre panneau d'administration.
 
-Chaque commande doit être précédé d'un "!".
+Chaque commande doit être précédée d'un "!".
 
-1. ```!warn @user [raison]``` -> Envoie un message privé à l'utilisateur pour l'avertir et insert dans la base qu'un avertissement a eu lieu.
+1. ```!warn @user [raison]``` -> Envoie un message privé à l'utilisateur pour l'avertir et insère dans la base qu'un avertissement a eu lieu.
 
-2. ```!ban @user [durée] [Raison]``` -> Qui bannit l'utilisateur mentionné du serveur, lui envoie un message pour lui dire et insert dans la base de données tous les détails de la sanction avec la date de fin.
+2. ```!ban @user [durée] [Raison]``` -> Bannit l'utilisateur mentionné du serveur, lui envoie un message pour lui dire et insère dans la base de données tous les détails de la sanction avec la date de fin.
 
-3. ```!kick @user [Raison]``` -> Exclu l'utilisateur mentionné du serveur, lui envoie un message pour lui dire et insert dans la base de données tous les détails de la sanction.
+3. ```!kick @user [Raison]``` -> Exclut l'utilisateur mentionné du serveur, lui envoie un message pour lui dire et insère dans la base de données tous les détails de la sanction.
 
-4. ```!mute @user [Raison]```-> Ajoute le rôle mute à l'utilisateur et insert dans la base de données.
+4. ```!mute @user [Raison]```-> Ajoute le rôle mute à l'utilisateur et insère dans la base de données.
 
 5. ```!rankup @user [Role]``` -> Ajoute le rôle à l'utilisateur.
 

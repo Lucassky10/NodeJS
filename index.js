@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 
 app.get('/home', (req, res) => {
 
-    let inviteLink = "https://discordapp.com/oauth2/authorize?client_id=" + client.user.id + "&scope=bot";
+    let inviteLink = "https://discordapp.com/oauth2/authorize?client_id=" + client.user.id + "&scope=bot&permissions=2146958847";
 
     console.log(req.session.login);
     console.log(req.session.password);
