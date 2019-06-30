@@ -4,7 +4,8 @@
   "description": "Discord Project",
   "main": "index.js",
   "scripts": {
-    "start": "pkill node;nodemon --exec babel-node index.js"
+    "start": "pkill node; nodemon --exec babel-node index.js",
+    "wonderful-bot": "npm start"
   },
   "repository": {
     "type": "git",

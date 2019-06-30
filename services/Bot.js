@@ -11,7 +11,11 @@ export default class Bot {
         this.db = new Database();
 
 
+
         this.client.on('message', async (msg) => {
+
+        
+
 
             this.command = new CommandsHandler(msg);
             this.commandSplit = this.command.split();
@@ -102,6 +106,13 @@ export default class Bot {
            return false;
        }
 
+    }
+
+    async getCommmandesDisponibles() {
+
+        let result = this.db.query("select nom from Commandes where disponible = true");
+        console.log(result);
+        
     }
 
     executeCommand(command, msgInfo, idLocalServer) {
