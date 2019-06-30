@@ -36,7 +36,8 @@ create table roles (
 
 create table commandes (
     nom varchar PRIMARY KEY,
-    niveau_autorite integer check (niveau_autorite>0 and niveau_autorite<11)
+    niveau_autorite integer check (niveau_autorite>0 and niveau_autorite<11),
+    disponible boolean
 );
 
 create table sanctions (
@@ -112,10 +113,12 @@ insert into roles (id_user_discord, id_serveur, nom, num) values ('5263015058888
 
 -- données  pour tester commandes
 
-insert into commandes (nom, niveau_autorite) values ('ban', 4);
-insert into commandes (nom, niveau_autorite) values ('mute', 6);
-
-
+insert into commandes (nom, niveau_autorite,disponible) values ('ban', 4,true);
+insert into commandes (nom, niveau_autorite,disponible) values ('mute', 6,true);
+insert into commandes (nom, niveau_autorite,disponible) values ('rankdown', 4,true);
+insert into commandes (nom, niveau_autorite,disponible) values ('rankup', 4,true);
+insert into commandes (nom, niveau_autorite,disponible) values ('kick', 4,true);
+insert into commandes (nom, niveau_autorite,disponible) values ('warn', 6,true);
 
 -- données fake pour tester sanctions
 
