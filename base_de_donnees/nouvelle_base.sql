@@ -58,8 +58,7 @@ create table sanctions (
 
 create table membres (
     id_discord varchar not null,
-    pwd varchar(60) not null,
-    primary key (id_discord)
+    pwd varchar(60) not null
 );
 
  -- données table serveurs

@@ -2,8 +2,7 @@ import DiscordClient from "./DiscordClient";
 import Database from "./Database";
 import CommandsHandler from "./CommandsHandler";
 import moment from 'moment';
-import sha1 from 'sha1'
-
+ 
 export default class Bot {
 
     constructor() {
@@ -187,7 +186,7 @@ export default class Bot {
 
             case '!rankup':
                 // para = ['rankup'];
-
+                    newrole = null;
 
                     msgInfo.guild.guildObject.roles.tap(roles => {
                         if (roles.name === this.commandSplit[2]) {
@@ -207,7 +206,7 @@ export default class Bot {
 
             case '!rankdown':
                             // para = ['rankdown'];
-
+                    newrole = null;
                     msgInfo.guild.guildObject.roles.tap(roles => {
                         if (roles.name === this.commandSplit[2]) {
                             (newrole = roles.id)
@@ -218,7 +217,7 @@ export default class Bot {
 
                         this.command.msg.reply('Le role ' + this.commandSplit[2] + ' a bien été enlevé à ' + this.command.get1stMentioned().username);
                     } else {
-                        this.command.msg.reply( this.command.get1stMentioned().username + ' Ne posséde pas le role ' + this.commandSplit[2]);
+                        this.command.msg.reply( this.command.get1stMentioned().username + ' ne possède pas le role ' + this.commandSplit[2]);
                     }
             break;
             case '!warn':
