@@ -29,7 +29,7 @@
     "fetch": "^1.1.0",
     "generate-password": "^1.4.2",
     "libsodium-wrappers": "^0.7.4",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "nodejs-websocket": "^1.7.2",
     "pg": "^7.11.0",
